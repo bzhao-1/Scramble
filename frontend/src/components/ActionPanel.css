@@ -5,6 +5,18 @@ button {
   font-size: 1em;
   font-weight: 500;
   cursor: pointer;
+  transition: all 1s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  border: 1px solid #7c7c7c;
+  background-color: ghostwhite
+}
+
+button:active {
+  transform: scale(0.9);
+  border: 1px solid #7c7c7c;
 }
 
 .action-panel {
@@ -19,6 +31,8 @@ button {
   height: 50px;
   margin-left: 10px;
   margin-right: 10px;
+  background-color: white;
+
 }
 
 .hand-container {
@@ -29,9 +43,10 @@ button {
   justify-content: center;
   margin: 0 auto;
   margin-top: 20px;
-  background-color: rgb(255, 255, 255);
+  background-color: lightgray;
   border-radius: 8px;
-  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .button-container {
@@ -42,13 +57,10 @@ button {
   margin-top: 10px;
 }
 
-button:hover {
-  border: 1px solid #7c7c7c;
-}
-
 .button-ap {
   width: 120px;
   height: 50px;
+  background-color: white;
 }
 
 .submit-button {

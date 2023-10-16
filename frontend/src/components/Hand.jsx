@@ -7,8 +7,16 @@ export default function Hand() {
     for (let i = 0; i < 7; i++){
         tiles.push(<Tile key={i} />);
     }
+
+    const dropTile = e => {
+        e.preventDefault();
+        const tile_id = e.dataTransfer.getData('tile_id');
+        const tile = document.getElementById(tile_id);
+        e.target.appendChild(card);
+    }
+
     return (
-        <div className="hand">
+        <div className="hand" onDrop={dropTile}>
             {tiles}
         </div>
     );   
