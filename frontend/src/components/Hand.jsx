@@ -8,15 +8,8 @@ export default function Hand() {
         tiles.push(<Tile key={i} />);
     }
 
-    const dropTile = e => {
-        e.preventDefault();
-        const tile_id = e.dataTransfer.getData('tile_id');
-        const tile = document.getElementById(tile_id);
-        e.target.appendChild(card);
-    }
-
     return (
-        <div className="hand" onDrop={dropTile}>
+        <div className="hand">
             {tiles}
         </div>
     );   
