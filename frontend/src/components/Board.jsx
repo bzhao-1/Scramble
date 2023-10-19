@@ -1,19 +1,21 @@
 import React, { useRef, useState } from "react";
 import "./Board.css";
+import Cell from "./Cell"
 
-const Board = () => {
-    const [isHovered, setIsHovered] = useState(false);
+const Board = ({ tiles, tilePositions }) => {
 
-    const onHover = (e) => {
-        setIsHovered(!isHovered);
+    const [hasTile, setHasTile] = useState(false);
+
+    const handleClick = (e) => {
+        e.target.hasTile = !e.target.hasTile;
         logger(e);
+        setHasTile(!hasTile);
     }
 
     const logger = (e) => {
-        console.log(e);
+        console.log(e.target);
         // console.log(e.target.innerHTML);
     }
-
     // double letters and so on
     const tw = [[0, 0], [0, 7], [0,14], [7, 0], [7, 14], [14, 0], [14, 7], [14, 14]];
     const dw = [[1, 1], [2, 2], [3, 3], [4, 4],[10, 10], [11, 11], [12, 12], [13, 13],
@@ -51,29 +53,33 @@ const Board = () => {
             }
 
             cells.push(
-                <div
-                    id={`${i}-${j}`}
+                // <Cell
+                //     key={`${i}-${j}`}
+                //     i={i}
+                //     j={j}
+                //     cellStyle={cellStyle}
+                //     children={i === 4 && j === 10 && tiles.length >= 4 ? 
+                //         tiles[3] : cellValue}
+                //     style={{backgroundColor: isHovered ? "gray" : "navy"}} 
+                //     onClick={(e) => logger(e)}
+                //     // style={{
+                //     //     backgroundColor: isHovered ? 'gray' : '',
+                //     //     color: isHovered ? 'white' : '',
+                //     // }}
+                // >{cellValue}</Cell>
+                <div 
                     key={`${i}-${j}`}
-                    type="text"
-                    className={`cell ${cellStyle}`}
-                    readOnly
-                    value={cellValue}
-                    // onMouseEnter={onHover}
-                    // onMouseLeave={onHover}
-                    // onClick={onHover}
-                    style={{backgroundColor: isHovered ? "gray" : cellValue}} 
-                    onClick={(e) => onHover(e)}
-                    onDragStart={(e) => dragStart(e, index)}
-                    onDragEnter={(e) => dragEnter(e, index)}
-                    onDragEnd={(e) => drop}
-                    // style={{
-                    //     backgroundColor: isHovered ? 'gray' : '',
-                    //     color: isHovered ? 'white' : '',
-                    // }}
-                >{cellValue}</div>
+                    id={`${i}-${j}`}
+                    // hasTile={false}
+                    style={{backgroundColor: hasTile ? "gray" : "navy"}} 
+                    className="cell"
+                    onClick={(e) => handleClick(e)}
+                    >
+                    {cellValue}
+                </div>
             );
         }
-        rows.push(<div style={{display:"flex"}} key={i}>{cells}</div>);
+        rows.push(<div style={{display:"flex"}} key={i} className="row">{cells}</div>);
     }
 
     
@@ -96,7 +102,7 @@ const Board = () => {
     return (
         <div id="board">
             {rows}
-            <div id="test" >{test}</div>
+            <div id="test" style={{backgroundColor: hasTile ? "gray" : "navy"}} onClick={(e) => onHover(e)}>{test}</div>
         </div>
     );
 }

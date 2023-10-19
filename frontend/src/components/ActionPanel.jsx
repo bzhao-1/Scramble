@@ -4,18 +4,7 @@ import './ActionPanel.css';
 import shuffleImage from '../assets/shuffle.jpg';
 import refreshImage from '../assets/refresh.jpg';
 
-const ActionPanel = (props) => {
-
-    const [tiles, setTiles] = useState([]);
-    const handleDrag = () => {
-        setLetter('B');
-    }
-    for (let i = 0; i < 7; i++){
-        tiles.push(<Tile key={i} onStop={handleDrag}/>);
-    }
-    console.log(tiles);
-
-    
+const ActionPanel = ({ tiles }) => {
 
     return (
         <div className="action-panel">
@@ -25,7 +14,9 @@ const ActionPanel = (props) => {
                         backgroundImage: `url(${shuffleImage})`,
                     }}>
                 </button>
-                {tiles}
+                <div className='tile-hand'>
+                    {tiles}
+                </div>
                 <button className="button-hand"
                     style={{
                         backgroundImage: `url(${refreshImage})`,
