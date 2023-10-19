@@ -8,6 +8,7 @@ import './Game.css';
 function Game() {
   const [board, setBoard] = useState(Board.rows);
   const [test, setTest] = useState(Board.test);
+  const [activePiece, setActivePiece] = useState();
   const dragItem = useRef();
   const dragOverItem = useRef();
 
@@ -30,6 +31,11 @@ function Game() {
 
   const handleDrag = () => {
     Tile.setLetter('B');
+  }
+
+  const updateBoard = () => {
+    var updatedTile = document.getElementById("test");
+    updatedTile.test = 'B'
   }
 
   return (

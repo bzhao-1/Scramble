@@ -2,6 +2,17 @@ import React, { useRef, useState } from "react";
 import "./Board.css";
 
 const Board = () => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    const onHover = (e) => {
+        setIsHovered(!isHovered);
+        logger(e);
+    }
+
+    const logger = (e) => {
+        console.log(e);
+        // console.log(e.target.innerHTML);
+    }
 
     // double letters and so on
     const tw = [[0, 0], [0, 7], [0,14], [7, 0], [7, 14], [14, 0], [14, 7], [14, 14]];
@@ -41,14 +52,24 @@ const Board = () => {
 
             cells.push(
                 <div
+                    id={`${i}-${j}`}
                     key={`${i}-${j}`}
                     type="text"
                     className={`cell ${cellStyle}`}
                     readOnly
                     value={cellValue}
+                    // onMouseEnter={onHover}
+                    // onMouseLeave={onHover}
+                    // onClick={onHover}
+                    style={{backgroundColor: isHovered ? "gray" : cellValue}} 
+                    onClick={(e) => onHover(e)}
                     onDragStart={(e) => dragStart(e, index)}
                     onDragEnter={(e) => dragEnter(e, index)}
                     onDragEnd={(e) => drop}
+                    // style={{
+                    //     backgroundColor: isHovered ? 'gray' : '',
+                    //     color: isHovered ? 'white' : '',
+                    // }}
                 >{cellValue}</div>
             );
         }
@@ -75,7 +96,7 @@ const Board = () => {
     return (
         <div id="board">
             {rows}
-            {test}
+            <div id="test" >{test}</div>
         </div>
     );
 }

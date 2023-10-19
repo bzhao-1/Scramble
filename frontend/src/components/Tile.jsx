@@ -4,16 +4,15 @@ import "./Tile.css";
 
 export default function Tile(props) {
     const [letter, setLetter] = useState('A');
-
-    const handleDrag = () => {
-        setLetter('B');
-    }
+    const [clicked, setClicked] = useState(false);
 
     return (
-        <Draggable onStop={handleDrag}>
+        // <Draggable onStop={handleDrag}>
+        //     <div className="tile">{letter}</div>
+        // </Draggable>
+        <button  onClick={() => setClicked(!clicked)}>
             <div className="tile">{letter}</div>
-        </Draggable>
-        
+        </button>
     )
 }
 
