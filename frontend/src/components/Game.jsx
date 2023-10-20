@@ -11,7 +11,7 @@ function Game() {
     tiles.push(<Tile key={i} />); // will be passed by the server in the future
   }
 
-  let tilePositions = [[4, 10, "I"], [6, 7, "J"]]; // hardcoding the cell positions for now as well
+  let tilePositions = [{x: 4, y: 10, letter: "I"}, {"x": 6, "y": 7, "letter": "J"}]; // hardcoding the cell positions for now as well
 
   const [board, setBoard] = useState(Board.rows);
   const [test, setTest] = useState(Board.test);
@@ -45,12 +45,35 @@ function Game() {
     updatedTile.test = 'B'
   }
 
+  const submit = () => {
+    const baseURL = ""
+    const url = baseURL + "/"
+    const data = JSON.stringify(tilePositions)
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: data
+    })
+  }
+
   return (
     <div>
       <div className="board-score">
-        {board.rows.map((, )) => (
-          
-        )}
+        {/* {board.map((row, )) => (
+          {row.map((cell, )) => (
+            <div 
+                key={`${i}-${j}`}
+                id={`${i}-${j}`}
+                // hasTile={false}
+                style={{backgroundColor: e.target ? "gray" : "navy"}} 
+                className="cell"
+                onClick={(e) => handleClick(e)}>
+                {cellValue}
+              </div>
+          )}
+        )} */}
         <Board tiles={tiles} tilePositions={tilePositions} />
         <Infoboard/>
       </div>

@@ -71,7 +71,7 @@ const Board = ({ tiles, tilePositions }) => {
                     key={`${i}-${j}`}
                     id={`${i}-${j}`}
                     // hasTile={false}
-                    style={{backgroundColor: hasTile ? "gray" : "navy"}} 
+                    style={{backgroundColor: e.target ? "gray" : "navy"}} 
                     className="cell"
                     onClick={(e) => handleClick(e)}
                     >
