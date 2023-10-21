@@ -71,7 +71,7 @@ const Board = ({ tiles, tilePositions }) => {
                     key={`${i}-${j}`}
                     id={`${i}-${j}`}
                     // hasTile={false}
-                    style={{backgroundColor: e.target ? "gray" : "navy"}} 
+                    // style={{backgroundColor: e.target ? "gray" : "navy"}} 
                     className="cell"
                     onClick={(e) => handleClick(e)}
                     >
@@ -102,7 +102,7 @@ const Board = ({ tiles, tilePositions }) => {
     return (
         <div id="board">
             {rows}
-            <div id="test" style={{backgroundColor: hasTile ? "gray" : "navy"}} onClick={(e) => onHover(e)}>{test}</div>
+            <div id="test" style={{backgroundColor: hasTile ? "gray" : "navy"}} onClick={(e) => handleClick(e)}>{test}</div>
         </div>
     );
 }
