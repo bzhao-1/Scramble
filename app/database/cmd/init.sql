@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS games (
 );
 
 CREATE ROLE KoalaAdmin 
-LOGIN
+LOGIN KoalaAdmin
 PASSWORD 'KoalatyProduct';
 
 GRANT ALL PRIVILEGES ON DATABASE scramble_db to KoalaAdmin;
