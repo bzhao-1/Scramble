@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React from "react";
+import Cell from "./Cell.jsx";
+import Tile from "./Tile.jsx";
 import "./Board.css";
 import Cell from "./Cell"
 
-const Board = ({ tiles, tilePositions }) => {
+const Board = ({ tilePositions }) => {
 
     const [hasTile, setHasTile] = useState(false);
 
@@ -69,13 +71,11 @@ const Board = ({ tiles, tilePositions }) => {
                 // >{cellValue}</Cell>
                 <div 
                     key={`${i}-${j}`}
-                    id={`${i}-${j}`}
-                    // hasTile={false}
-                    // style={{backgroundColor: e.target ? "gray" : "navy"}} 
-                    className="cell"
-                    onClick={(e) => handleClick(e)}
-                    >
-                    {cellValue}
+                    i={i}
+                    j={j}
+                    cellStyle={cellStyle}
+                    children={tilePositions[`${i},${j}`] ? <Tile letter={tilePositions[`${i},${j}`]} /> : cellValue}
+                    onClick={(e) => handleClick(e)}>
                 </div>
             );
         }

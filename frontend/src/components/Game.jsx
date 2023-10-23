@@ -5,13 +5,29 @@ import Infoboard from "./Infoboard";
 import Tile from './Tile';
 import './Game.css';
 
+export let tilePositions = [
+  {letter: "I", xLoc: 4, yLoc: 10},
+  {letter: "J", xLoc: 6, yLoc: 7}
+ ];
+
 function Game() {
+   // hardcoding the cell positions for now as well
+
+  // const [tilePositions, setTilePositions] = useState({}); // function for placing the tiles onto the board
+
+  // function updateTilePositions(change) { // wrapper to be passed to the action panel
+  //   setTilePositions(change);
+  // };
+
   let tiles = []; // hardcoding this data for now
   for (let i = 0; i < 7; i++) {
-    tiles.push(<Tile key={i} />); // will be passed by the server in the future
+    tiles.push(<Tile
+      key={i}
+      letter='A'
+      tilePositions={tilePositions}
+      // updateTilePositions={updateTilePositions}
+    />); // will be passed by the server in the future
   }
-
-  let tilePositions = [{x: 4, y: 10, letter: "I"}, {"x": 6, "y": 7, "letter": "J"}]; // hardcoding the cell positions for now as well
 
   const [board, setBoard] = useState(Board.rows);
   const [test, setTest] = useState(Board.test);
@@ -77,7 +93,9 @@ function Game() {
         <Board tiles={tiles} tilePositions={tilePositions} />
         <Infoboard/>
       </div>
-      <ActionPanel tiles={tiles} />
+      <ActionPanel
+        tiles={tiles}
+      />
     </div>
   );
 };
