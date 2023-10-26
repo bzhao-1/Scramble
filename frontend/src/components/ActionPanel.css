@@ -5,13 +5,13 @@ button {
   font-size: 1em;
   font-weight: 500;
   cursor: pointer;
+  background-color: lightgray;
   transition: all 1s;
 }
 
 button:hover {
   transform: scale(1.1);
   border: 1px solid #7c7c7c;
-  background-color: ghostwhite
 }
 
 button:active {

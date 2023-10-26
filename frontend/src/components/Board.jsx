@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Cell from "./Cell.jsx";
 import Tile from "./Tile.jsx";
 import "./Board.css";
-import Cell from "./Cell"
 
 const Board = ({ tilePositions }) => {
 
-    const [hasTile, setHasTile] = useState(false);
+    // const handleClick = (e) => {
+    //     e.target.hasTile = !e.target.hasTile;
+    //     console.log(e.target);
+    //     setHasTile(!hasTile);
+    // }
 
-    const handleClick = (e) => {
-        e.target.hasTile = !e.target.hasTile;
-        logger(e);
-        setHasTile(!hasTile);
-    }
+    // const handleClick = (e) => {
+    //     e.target.isFilled = !e.target.hasTile;
+    //     console.log(e.target);
+    // }
 
     const logger = (e) => {
-        console.log(e.target);
         // console.log(e.target.innerHTML);
     }
     // double letters and so on
@@ -53,7 +54,6 @@ const Board = ({ tilePositions }) => {
                 cellStyle = "dl";
                 cellValue = "DL";
             }
-
             cells.push(
                 // <Cell
                 //     key={`${i}-${j}`}
@@ -69,17 +69,22 @@ const Board = ({ tilePositions }) => {
                 //     //     color: isHovered ? 'white' : '',
                 //     // }}
                 // >{cellValue}</Cell>
-                <div 
+                <Cell 
                     key={`${i}-${j}`}
                     i={i}
                     j={j}
                     cellStyle={cellStyle}
-                    children={tilePositions[`${i},${j}`] ? <Tile letter={tilePositions[`${i},${j}`]} /> : cellValue}
-                    onClick={(e) => handleClick(e)}>
-                </div>
+                    // cellStyle={{backgroundColor: hasTile? "gray" : "blue"}}
+
+                    haasTile={false}
+                    // children={tilePositions[`${i},${j}`] ? <Tile letter={tilePositions[`${i},${j}`]} /> : cellValue}
+                    cellValue={cellValue}
+                    onClick={(e) => handleClick(e)}
+                    >
+                </Cell>
             );
         }
-        rows.push(<div style={{display:"flex"}} key={i} className="row">{cells}</div>);
+        rows.push(<div key={i} className="row">{cells}</div>);
     }
 
     
@@ -102,7 +107,7 @@ const Board = ({ tilePositions }) => {
     return (
         <div id="board">
             {rows}
-            <div id="test" style={{backgroundColor: hasTile ? "gray" : "navy"}} onClick={(e) => handleClick(e)}>{test}</div>
+            {/* <div id="test" style={{backgroundColor: hasTile ? "gray" : "navy"}} onClick={(e) => handleClick(e)}>{test}</div> */}
         </div>
     );
 }
