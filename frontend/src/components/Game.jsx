@@ -1,103 +1,54 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Board from "./Board";
 import ActionPanel from "./ActionPanel";
 import Infoboard from "./Infoboard";
 import Tile from './Tile';
 import './Game.css';
 
-export let tilePositions = [
-  {letter: "I", xLoc: 4, yLoc: 10},
-  {letter: "J", xLoc: 6, yLoc: 7}
- ];
+export default function Game() {
 
-function Game() {
-   // hardcoding the cell positions for now as well
+  const [letterUpdates, setLetterUpdates] = useState({});
+  const [tiles, setTiles] = useState(
+    Array.from({ length: 7 }, (_, i) => ({ // hardcoding this data for now
+      id: i,
+      letter: 'A',
+      position: 'ActionPanel' // initial position
+    }))
+  );
 
-  // const [tilePositions, setTilePositions] = useState({}); // function for placing the tiles onto the board
+  function handleTileDrop(id, cellKey, letter) {
+    id = Number(id);
 
-  // function updateTilePositions(change) { // wrapper to be passed to the action panel
-  //   setTilePositions(change);
-  // };
+    setLetterUpdates(prevState => ({
+      ...prevState,
+      [id]: [cellKey, letter]
+    }));
 
-  let tiles = []; // hardcoding this data for now
-  for (let i = 0; i < 7; i++) {
-    tiles.push(<Tile
-      key={i}
-      letter='A'
-      tilePositions={tilePositions}
-      // updateTilePositions={updateTilePositions}
-    />); // will be passed by the server in the future
-  }
-
-  const [board, setBoard] = useState(Board.rows);
-  const [test, setTest] = useState(Board.test);
-  const [activePiece, setActivePiece] = useState();
-  const dragItem = useRef();
-  const dragOverItem = useRef();
-
-  const dragStart = (e, position) => {
-      dragItem.current = position;
-      console.log(e.target.innerHTML);
-      console.log(board);
-  }
-
-  const dragEnter = (e, position) => {
-      dragOverItem.current = position;
-      console.log(e.target.innerHTML);
-  }
-
-  const drop = () => {
-      console.log(dragItem);
-      console.log(dragOverItem);
-      setTest('B');
-  }
-
-  const handleDrag = () => {
-    Tile.setLetter('B');
-  }
-
-  const updateBoard = () => {
-    var updatedTile = document.getElementById("test");
-    updatedTile.test = 'B'
-  }
-
-  const submit = () => {
-    const baseURL = ""
-    const url = baseURL + "/"
-    const data = JSON.stringify(tilePositions)
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: data
-    })
-  }
+    setTiles(prevTiles =>
+      prevTiles.map(tile =>
+        tile.id === id ? { ...tile, position: 'Board' } : tile
+      )
+    );
+  };
 
   return (
     <div>
       <div className="board-score">
-        {/* {board.map((row, )) => (
-          {row.map((cell, )) => (
-            <div 
-                key={`${i}-${j}`}
-                id={`${i}-${j}`}
-                // hasTile={false}
-                style={{backgroundColor: e.target ? "gray" : "navy"}} 
-                className="cell"
-                onClick={(e) => handleClick(e)}>
-                {cellValue}
-              </div>
-          )}
-        )} */}
-        <Board tiles={tiles} tilePositions={tilePositions} />
-        <Infoboard/>
+        <Board
+          letterUpdates={letterUpdates}
+          onTileDrop={handleTileDrop}
+        />
+        <Infoboard />
       </div>
       <ActionPanel
-        tiles={tiles}
+        tilesAp={tiles.map(tile => {
+          if (tile.position === 'ActionPanel') {
+            return <Tile key={tile.id} letter={tile.letter} id={tile.id} />;
+          } else {
+            return <div key={tile.id} className="tile-placeholder"></div>;
+          }
+        })}
       />
     </div>
   );
 };
-
-export default Game;

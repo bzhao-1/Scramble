@@ -1,42 +1,29 @@
 import React, { useState } from "react";
 import "./Cell.css";
 
-export default function Cell({ i, j, cellStyle, cellValue, children, haasTile }) {
-    const[hasTile, setHasTile] = useState(haasTile);
-    const[letter, setLetter] = useState(cellValue);
-    const updatedStyle = {
-        ...cellStyle,
-        backgroundColor: hasTile? "gray" : cellStyle.backgroundColor,
+export default function Cell({ i, j, cellStyle, children, tile, onTileDrop }) {
+
+    const key = `${i}-${j}`; // key for the tilePositions object
+
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const droppedLetter = e.dataTransfer.getData("letter");
+        const droppedId = e.dataTransfer.getData("id");
+        onTileDrop(droppedId, key, droppedLetter);
     };
 
-    const handleClick = () => {
-        console.log("old: " + letter);
-        if (hasTile) {
-            alert("Tile is already filled!")
-            return;
-        }
-        setHasTile(!hasTile);
-        setLetter('B');
-        console.log("new: " + letter);
-        console.log(hasTile);
-        console.log(i);
-        return {
-            letter: "B",
-            xLoc: j,
-            yLoc: i,
-        }
-        // setHasTile(!hasTile);
-    }
+    const handleDragOver = (e) => {
+        e.preventDefault();  // This is important to allow dropping
+    };
 
     return (
         <div
-            key={`${i}-${j}`}
             className={`cell ${cellStyle}`}
-            onClick={() => handleClick()}
-            style={{backgroundColor: hasTile? "gray" : "blue"}}
+            onDrop={tile ? undefined : handleDrop}
+            onDragOver={tile ? undefined : handleDragOver}
         >
             <div className="cell-content">
-                {cellValue}
+                {tile ? tile : children}
             </div>
         </div>
     );
