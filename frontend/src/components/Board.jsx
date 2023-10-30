@@ -4,22 +4,6 @@ import Tile from "./Tile.jsx";
 import "./Board.css";
 
 const Board = ({ tilePositions }) => {
-
-    // const handleClick = (e) => {
-    //     e.target.hasTile = !e.target.hasTile;
-    //     console.log(e.target);
-    //     setHasTile(!hasTile);
-    // }
-
-    // const handleClick = (e) => {
-    //     e.target.isFilled = !e.target.hasTile;
-    //     console.log(e.target);
-    // }
-
-    const logger = (e) => {
-        // console.log(e.target.innerHTML);
-    }
-    // double letters and so on
     const tw = [[0, 0], [0, 7], [0,14], [7, 0], [7, 14], [14, 0], [14, 7], [14, 14]];
     const dw = [[1, 1], [2, 2], [3, 3], [4, 4],[10, 10], [11, 11], [12, 12], [13, 13],
                 [1, 13], [2, 12], [3, 11], [4, 10],[10, 4], [11, 3], [12, 2], [13, 1]];
@@ -55,29 +39,12 @@ const Board = ({ tilePositions }) => {
                 cellValue = "DL";
             }
             cells.push(
-                // <Cell
-                //     key={`${i}-${j}`}
-                //     i={i}
-                //     j={j}
-                //     cellStyle={cellStyle}
-                //     children={i === 4 && j === 10 && tiles.length >= 4 ? 
-                //         tiles[3] : cellValue}
-                //     style={{backgroundColor: isHovered ? "gray" : "navy"}} 
-                //     onClick={(e) => logger(e)}
-                //     // style={{
-                //     //     backgroundColor: isHovered ? 'gray' : '',
-                //     //     color: isHovered ? 'white' : '',
-                //     // }}
-                // >{cellValue}</Cell>
                 <Cell 
                     key={`${i}-${j}`}
                     i={i}
                     j={j}
                     cellStyle={cellStyle}
-                    // cellStyle={{backgroundColor: hasTile? "gray" : "blue"}}
-
                     haasTile={false}
-                    // children={tilePositions[`${i},${j}`] ? <Tile letter={tilePositions[`${i},${j}`]} /> : cellValue}
                     cellValue={cellValue}
                     onClick={(e) => handleClick(e)}
                     >
@@ -87,27 +54,9 @@ const Board = ({ tilePositions }) => {
         rows.push(<div key={i} className="row">{cells}</div>);
     }
 
-    
-
-    // const drop = () => {
-    //     dragOverItem.letter = "B"
-    //     splitted = dragOverItem.key.split('-')
-    //     row = splitted[0]
-    //     col = splitted[1]
-    //     const copyBoard = [...board];
-    //     // copyBoard.splice(dragItem.current, 1);
-    //     // copyBoard.splice(dragOverItem.current, 0, dragItemContent);
-    //     copyBoard.splice(dragOverItem.key, 1, dragOverItem)
-    //     setBoard(copyBoard);
-    // }
-    
-
-    const test = 'A';
-
     return (
         <div id="board">
-            {rows}
-            {/* <div id="test" style={{backgroundColor: hasTile ? "gray" : "navy"}} onClick={(e) => handleClick(e)}>{test}</div> */}
+            {rows} 
         </div>
     );
 }

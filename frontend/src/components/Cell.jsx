@@ -34,7 +34,6 @@ export default function Cell({ i, j, cellStyle, cellValue, children, haasTile })
             className={`cell ${cellStyle}`}
             onClick={() => handleClick()}
             style={{backgroundColor: hasTile? "gray" : "blue"}}
-            // style={updatedStyle}
         >
             <div className="cell-content">
                 {cellValue}
