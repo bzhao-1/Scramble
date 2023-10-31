@@ -12,9 +12,13 @@ export default function Game() {
     let tilesCopy = [...tiles];
     for (let i = 0; i < 7; i++) {
       let loc = Math.floor(Math.random() * indices.length);
-      tilesCopy[loc] = tiles[i];
-      indices.splice(loc, loc); 
+      console.log(indices[loc]);
+      tilesCopy[indices[loc]] = tiles[i];
+      // indices.splice(loc, 1); 
+      indices = indices.filter(value => value !== loc);
+      console.log(indices);
     }
+    setTiles(tilesCopy);
   }
 
   function logger() {
@@ -63,8 +67,8 @@ export default function Game() {
             return <div key={tile.id} className="tile-placeholder"></div>;
           }
         })}
-        shuffle={shuffle()}
-        logger={logger()}
+        shuffle={shuffle}
+        logger={logger}
       />
     </div>
   );
