@@ -11,7 +11,7 @@ export default function Game() {
   const [tiles, setTiles] = useState(
     Array.from({ length: 7 }, (_, i) => ({ // hardcoding this data for now
       id: i,
-      letter: 'A',
+      letter: i,
       position: 'ActionPanel' // initial position
     }))
   );
