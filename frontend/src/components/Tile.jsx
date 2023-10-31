@@ -18,7 +18,3 @@ export default function Tile({ letter, id }) {
         </div>
     );
 }
-
-// function tileComeBack() {
-    
-// }
