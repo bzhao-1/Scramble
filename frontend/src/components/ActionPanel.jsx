@@ -5,7 +5,7 @@ import refreshImage from '../assets/refresh.jpg';
 import { baseURL, gameID, player } from "../Welcome"
 import { boardTiles } from './Board';
 
-const ActionPanel = ({ tilesAp }) => {
+const ActionPanel = ({ tilesAp, shuffle, logger }) => {
 
     const submit = () => {
         console.log(boardTiles);
@@ -55,8 +55,8 @@ const ActionPanel = ({ tilesAp }) => {
             </div>
             <div className="button-container">
                 <button className="button-ap">Resign</button>
-                <button className="button-ap">Skip</button>
-                <button className="button-ap">Swap</button>
+                <button className="button-ap" onClick={logger}>Skip</button>
+                <button className="button-ap" onClick={shuffle}>Swap</button>
                 <button className="button-ap submit-button" onClick={submit}>Submit</button>
             </div>
         </div>

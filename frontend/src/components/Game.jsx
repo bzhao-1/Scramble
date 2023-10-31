@@ -5,7 +5,21 @@ import Infoboard from "./Infoboard";
 import Tile from './Tile';
 import './Game.css';
 
+
 export default function Game() {
+  const shuffle = () => {
+    let indices = [0, 1, 2, 3, 4, 5, 6]
+    let tilesCopy = [...tiles];
+    for (let i = 0; i < 7; i++) {
+      let loc = Math.floor(Math.random() * indices.length);
+      tilesCopy[loc] = tiles[i];
+      indices.splice(loc, loc); 
+    }
+  }
+
+  function logger() {
+    console.log(tiles);
+  }
 
   const [letterUpdates, setLetterUpdates] = useState({});
   const [tiles, setTiles] = useState(
@@ -17,6 +31,7 @@ export default function Game() {
   );
 
   function handleTileDrop(id, cellKey, letter) {
+    logger();
     id = Number(id);
 
     setLetterUpdates(prevState => ({
@@ -48,6 +63,8 @@ export default function Game() {
             return <div key={tile.id} className="tile-placeholder"></div>;
           }
         })}
+        shuffle={shuffle()}
+        logger={logger()}
       />
     </div>
   );
